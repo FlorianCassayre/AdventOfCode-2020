@@ -9,7 +9,7 @@ _My solutions to the 2020 edition of [Advent Of Code](https://adventofcode.com/2
 ## Problems & Solutions
 
 * [Day 1](https://adventofcode.com/2020/day/1): [solution](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day01.scala)
-* [Day 2](https://adventofcode.com/2020/day/2): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day02.scala)
+* [Day 2](https://adventofcode.com/2020/day/2): [solution](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day02.scala)
 * [Day 3](https://adventofcode.com/2020/day/3): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day03.scala)
 * [Day 4](https://adventofcode.com/2020/day/4): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day04.scala)
 * [Day 5](https://adventofcode.com/2020/day/5): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day05.scala)
