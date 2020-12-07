@@ -21,14 +21,10 @@ object Day07 extends Day(7):
       (bag1, children)
   }.toMap
 
-  def getColors(parent: String, color: String): Set[String] =
-    if (color == ShinyGold)
-      Set(parent)
-    else
-      graph(color).map(_._1).flatMap(s => getColors(parent, s)).toSet
+  def contains(bag: String): Boolean = bag == ShinyGold || graph(bag).exists((other, _) => contains(other))
 
-  override def solutionA = graph.keys.filter(_ != ShinyGold).flatMap(s => getColors(s, s)).toSet.size
+  override def solutionA = graph.keys.filter(_ != ShinyGold).count(contains)
 
-  def countBags(color: String): Int = graph(color).map((other, count) => count * countBags(other)).sum + 1
+  def countBags(bag: String): Int = graph(bag).map((other, count) => count * countBags(other)).sum + 1
 
   override def solutionB = countBags(ShinyGold) - 1
