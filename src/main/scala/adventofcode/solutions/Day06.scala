@@ -8,4 +8,4 @@ object Day06 extends Day(6):
 
   override def solutionA = groups.map(_.flatten.distinct.size).sum
 
-  override def solutionB = groups.map(g => g.flatten.distinct.count(c => g.forall(_.contains(c)))).sum
+  override def solutionB = groups.map(_.map(_.toSet).reduce(_ & _).size).sum
