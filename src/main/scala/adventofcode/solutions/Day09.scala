@@ -2,6 +2,8 @@ package adventofcode.solutions
 
 import adventofcode.Day
 
+import scala.collection.Searching._
+
 object Day09 extends Day(9):
 
   val window = 25
@@ -15,7 +17,8 @@ object Day09 extends Day(9):
   override def solutionB =
     (for
     i <- numbers.indices
-    j <- numbers.indices.drop(i + 2)
-    slice = numbers.slice(i, j)
-    if slice.sum == outlier
-      yield slice.min + slice.max).head
+    slices = numbers.indices.drop(i + 2).view.map(numbers.slice(i, _))
+    slice <- slices.map(_.sum).search(outlier) match
+      case Found(idx) => Some(slices(idx))
+      case _ => None
+    yield slice.min + slice.max).head
