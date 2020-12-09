@@ -16,7 +16,7 @@ _My solutions to the 2020 edition of [Advent Of Code](https://adventofcode.com/2
 * [Day 6](https://adventofcode.com/2020/day/6): [solution](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day06.scala)
 * [Day 7](https://adventofcode.com/2020/day/7): [solution](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day07.scala)
 * [Day 8](https://adventofcode.com/2020/day/8): [solution](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day08.scala)
-* [Day 9](https://adventofcode.com/2020/day/9): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day09.scala)
+* [Day 9](https://adventofcode.com/2020/day/9): [solution](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day09.scala)
 * [Day 10](https://adventofcode.com/2020/day/10): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day10.scala)
 * [Day 11](https://adventofcode.com/2020/day/11): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day11.scala)
 * [Day 12](https://adventofcode.com/2020/day/12): –[](https://github.com/FlorianCassayre/AdventOfCode-2020/blob/master/src/main/scala/adventofcode/solutions/Day12.scala)

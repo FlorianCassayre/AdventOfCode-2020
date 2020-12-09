@@ -32,7 +32,7 @@ abstract class Day(day: Int) extends App {
   protected val input: String = readInput()
   protected val lines: IndexedSeq[String] = input.split(lineSeparator).toIndexedSeq
 
-  type Solution = String | Int
+  type Solution = String | Int | BigInt
 
   def solutionA: Solution
   def solutionB: Solution
