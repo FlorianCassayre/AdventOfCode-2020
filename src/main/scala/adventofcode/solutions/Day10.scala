@@ -2,6 +2,7 @@ package adventofcode.solutions
 
 import adventofcode.Day
 
+import scala.util.chaining._
 import scala.language.implicitConversions
 
 object Day10 extends Day(10):
@@ -13,10 +14,9 @@ object Day10 extends Day(10):
 
   override def solutionA = differences.count(_ == 1) * differences.count(_ == 3)
 
-  lazy val sequence: LazyList[Long] = 0L #:: 1L #:: 1L #:: sequence.sliding(3).to(LazyList).map(_.sum)
+  val sequence = LazyList.unfold(Seq(1L, 1L, 2L))(s => Some(s.head, s.tail :+ s.sum))
 
-  override def solutionB = differences
-    .foldLeft(Seq(1))((acc, e) => e match
-      case 1 => (acc.head + 1) +: acc.tail
-      case 3 => 1 +: acc
-    ).map(sequence).product
+  override def solutionB = Seq.unfold(differences) {
+    case s@(h +: _) => s.span(_ == h).pipe((l, r) => Some(l.count(_ == 1), r))
+    case _ => None
+  }.map(sequence).product
