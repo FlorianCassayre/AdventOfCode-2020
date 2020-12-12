@@ -5,13 +5,9 @@ import java.io.{File, PrintWriter}
 import scala.io.Source
 import scala.util.{Failure, Success, Try}
 
-abstract class Day(day: Int) extends App {
+abstract class Day(day: Int) extends App:
 
-  private sealed abstract class SubProblem(val name: String)
-  private case object A extends SubProblem("A")
-  private case object B extends SubProblem("B")
-
-  require(day >= 1 && day <= 25, "Invalid day number")
+  require((1 to 25).contains(day), "Invalid day number")
 
   protected val lineSeparator: String = "\n"
 
@@ -19,50 +15,39 @@ abstract class Day(day: Int) extends App {
 
   private def readInput(): String = Source.fromFile(s"input/$formatted.txt").getLines().mkString(lineSeparator)
 
-  private def writeOutput(output: String, subProblem: SubProblem): Unit = {
-    val sub = subProblem.name
-    val path = s"output/$formatted$sub.txt"
+  private def writeOutput(output: String, part: Char): Unit =
+    val path = s"output/$formatted$part.txt"
     new File(path).getParentFile.mkdirs()
-    new PrintWriter(path) {
+    new PrintWriter(path):
       write(output)
       close()
-    }
-  }
 
   protected val input: String = readInput()
-  protected val lines: IndexedSeq[String] = input.split(lineSeparator).toIndexedSeq
+  protected lazy val lines: IndexedSeq[String] = input.split(lineSeparator).toIndexedSeq
 
-  type Solution = String | Int | BigInt
+  type Solution = String | Int | Long | BigInt
 
   def solutionA: Solution
   def solutionB: Solution
 
+  private final def submit(): Unit =
+    submitSolution(solutionA, 'A')
+    submitSolution(solutionB, 'B')
 
-  // Submission
-
-  private final def submit(): Unit = {
-    submitSolution(solutionA, A)
-    submitSolution(solutionB, B)
-  }
-
-  private def submitSolution(function: => Solution, subProblem: SubProblem): Unit = {
-    Try(function.toString) match {
+  private def submitSolution(function: => Solution, part: Char): Unit =
+    Try(function.toString) match
       case Success(string) =>
-        writeOutput(string, subProblem)
+        writeOutput(string, part)
         println(string)
         println()
       case Failure(_: NotImplementedError) =>
-        println(s"(ignored solution ${subProblem.name})")
+        println(s"(ignored solution $part)")
         println()
       case Failure(exception) =>
         throw new RuntimeException(exception)
-    }
-  }
 
   private val mainThread: Thread = Thread.currentThread()
   new Thread(() => {
     mainThread.join()
     submit()
   }).start()
-
-}

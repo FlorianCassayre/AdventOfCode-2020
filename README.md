@@ -36,7 +36,7 @@ _My solutions to the 2020 edition of [Advent Of Code](https://adventofcode.com/2
 
 ## Usage
 
-This project runs on [Scala Dotty](https://dotty.epfl.ch) `0.27.0-RC1` and sbt Dotty `0.4.6`.
+This project runs on [Scala Dotty](https://dotty.epfl.ch) `3.0.0-M2` and sbt `1.4.4`.
 
 Use the following template to write a solution:
 
@@ -45,13 +45,11 @@ package adventofcode.solutions
 
 import adventofcode.Day
 
-object Day01 extends Day(1) {
+object Day01 extends Day(1):
 
   override def solutionA = ???
 
   override def solutionB = ???
-
-}
 ```
 (change `1` to the current problem day and fill in the `???`)
 
@@ -71,4 +69,6 @@ Alternatively, since `Day` extends `App`, all singleton children can be run as r
 
 ## License
 
-This repository is licensed under the MIT License, please refer to the `LICENSE` file.
+MIT
+
+An exception is made for the files `Day.scala` and `build.sbt` which I expressively release in the public domain.
