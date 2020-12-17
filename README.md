@@ -36,7 +36,7 @@ _My solutions to the 2020 edition of [Advent Of Code](https://adventofcode.com/2
 
 ## Usage
 
-This project runs on [Scala Dotty](https://dotty.epfl.ch) `3.0.0-M2` and sbt `1.4.4`.
+This project runs on [Scala Dotty](https://dotty.epfl.ch) `3.0.0-M3` and sbt `1.4.4`.
 
 Use the following template to write a solution:
 
