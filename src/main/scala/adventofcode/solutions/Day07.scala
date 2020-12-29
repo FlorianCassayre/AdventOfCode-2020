@@ -11,13 +11,12 @@ object Day07 extends Day(7):
 
   val graph = lines.map {
     case rPrefix(bag1, _, rest) =>
-      val children = Option(rest) match {
+      val children = Option(rest) match
         case Some(_) =>
           rest.split(", ").map {
             case rSeq(count, bag2) => (bag2, count.toInt)
           }.toSeq
         case None => Seq()
-      }
       (bag1, children)
   }.toMap
 

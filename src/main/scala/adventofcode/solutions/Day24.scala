@@ -31,13 +31,12 @@ object Day24 extends Day(24):
 
   override def solutionA = initial.size
 
-  val sequence = LazyList.unfold(initial) { tiles =>
-    val nextTiles = (tiles ++ tiles.flatMap(tile => neighbouring.map(tile + _))).flatMap { tile =>
+  val sequence = LazyList.iterate(initial)(tiles =>
+    (tiles ++ tiles.flatMap(tile => neighbouring.map(tile + _))).flatMap { tile =>
       val neighbours = neighbouring.map(tile + _).count(tiles)
       val color = if tiles.contains(tile) then (1 to 2).contains(neighbours) else neighbours == 2
       if color then Some(tile) else None
     }
-    Some(tiles.size, nextTiles)
-  }
+  )
 
-  override def solutionB = sequence(100)
+  override def solutionB = sequence(100).size

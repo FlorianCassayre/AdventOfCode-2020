@@ -28,19 +28,19 @@ object Day04 extends Day(4):
   object Field:
     private val map = Field.values.map(v => v.name -> v).toMap
     val requiredFields = (values.toSet - CountryID).map(_.name)
-    
+
     def validateSchema(passport: Seq[(String, String)]): Boolean =
       (passport.map(_._1).toSet intersect requiredFields) == requiredFields
-    
+
     def validateValues(passport: Seq[(String, String)]): Boolean = validateSchema(passport) && passport.forall {
       (field, value) => map(field).validate(value)
     }
 
-  val passports = input.split(lineSeparator + lineSeparator).map(_.split(lineSeparator).flatMap(_.split(" ")).map(
+  val passports = input.split(lineSeparator * 2).map(_.split(lineSeparator).flatMap(_.split(" ")).map(
     _.split(":") match
       case Array(field, value) => (field, value)
   ).toSeq).toSeq
-  
+
   override def solutionA = passports.count(Field.validateSchema)
 
   override def solutionB = passports.count(Field.validateValues)

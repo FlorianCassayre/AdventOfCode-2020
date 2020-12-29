@@ -4,7 +4,7 @@ import adventofcode.Day
 
 object Day16 extends Day(16):
 
-  val parts = input.split(lineSeparator + lineSeparator).map(_.split(lineSeparator).toIndexedSeq).toIndexedSeq
+  val parts = input.split(lineSeparator * 2).map(_.split(lineSeparator).toIndexedSeq).toIndexedSeq
 
   val (departures, constraints) = parts.head.map {
     case s"$name: $a0-$b0 or $a1-$b1" => name.startsWith("departure") -> Seq(a0.toInt to b0.toInt, a1.toInt to b1.toInt)

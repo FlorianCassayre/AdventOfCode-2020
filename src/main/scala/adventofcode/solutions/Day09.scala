@@ -7,7 +7,7 @@ import scala.collection.Searching._
 object Day09 extends Day(9):
 
   val window = 25
-  val numbers = lines.map(BigInt.apply)
+  val numbers = lines.map(_.toLong)
 
   val outlier = numbers.drop(window).zip(numbers.sliding(window))
     .find((n, p) => p.combinations(2).forall(_.sum != n)).get._1

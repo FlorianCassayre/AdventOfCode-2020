@@ -4,7 +4,7 @@ import adventofcode.Day
 
 object Day06 extends Day(6):
 
-  val groups = input.split(lineSeparator + lineSeparator).map(_.split(lineSeparator))
+  val groups = input.split(lineSeparator * 2).map(_.split(lineSeparator))
 
   override def solutionA = groups.map(_.flatten.distinct.size).sum
 

@@ -4,7 +4,7 @@ import adventofcode.Day
 
 object Day19 extends Day(19):
 
-  val parts = input.split(lineSeparator + lineSeparator).map(_.split(lineSeparator))
+  val parts = input.split(lineSeparator * 2).map(_.split(lineSeparator))
 
   enum Case:
     case Literal(c: Char)

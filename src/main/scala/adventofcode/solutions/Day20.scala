@@ -17,7 +17,7 @@ object Day20 extends Day(20):
     case '#' => true
     case `space` => false
 
-  val tiles = input.split(lineSeparator + lineSeparator).toVector.map(_.split(lineSeparator).toVector).map { s =>
+  val tiles = input.split(lineSeparator * 2).toVector.map(_.split(lineSeparator).toVector).map { s =>
     val tileId = s.head match
       case s"Tile $id:" => id.toInt
     val value = s.tail.toVector.map(_.map(parse(_, '.')).toVector)

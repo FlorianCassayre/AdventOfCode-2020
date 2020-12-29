@@ -8,7 +8,7 @@ object Day01 extends Day(1):
 
   val goal = 2020
   val ns = lines.map(_.toInt).sorted
-  
+
   def pair(a: Int, b: Int): Int =
     val sum = ns(a) + ns(b)
     if sum == goal then

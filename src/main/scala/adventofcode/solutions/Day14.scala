@@ -35,7 +35,7 @@ object Day14 extends Day(14):
 
   override def solutionB = initialize { case (Mask(zero, one, floating), Write(address, value)) =>
     val floatingBits = (0 until 36).filter(i => ((floating >>> i) & 1) != 0)
-    val power = (0 to floatingBits.size).flatMap(i => floatingBits.combinations(i))
+    val power = (0 to floatingBits.size).flatMap(floatingBits.combinations)
     val addresses = power.map(_.foldLeft(address & zero | one)((acc, e) => (acc | (1L << e))))
     addresses.map(_ -> value).toMap
   }

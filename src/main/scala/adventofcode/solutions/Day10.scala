@@ -14,7 +14,7 @@ object Day10 extends Day(10):
 
   override def solutionA = differences.count(_ == 1) * differences.count(_ == 3)
 
-  val sequence = LazyList.unfold(Seq(1L, 1L, 2L))(s => Some(s.head, s.tail :+ s.sum))
+  val sequence = LazyList.iterate(Seq(1L, 1L, 2L))(s => s.tail :+ s.sum).andThen(_.head)
 
   override def solutionB = Seq.unfold(differences) {
     case s@(h +: _) => s.span(_ == h).pipe((l, r) => Some(l.count(_ == 1), r))

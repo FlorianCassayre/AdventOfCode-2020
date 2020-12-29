@@ -16,6 +16,6 @@ object Day02 extends Day(2):
     min <= c && c <= max
   }
 
-  override def solutionB = parsed.count { (min, max, char, str) =>
+  override def solutionB = parsed.count((min, max, char, str) =>
     str(min - 1) == char ^ str(max - 1) == char
-  }
+  )

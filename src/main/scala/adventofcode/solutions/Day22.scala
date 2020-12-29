@@ -4,7 +4,7 @@ import adventofcode.Day
 
 object Day22 extends Day(22):
 
-  val Seq(initialDeck1, initialDeck2) = input.split(lineSeparator + lineSeparator).map(_.split(lineSeparator).tail.map(_.toInt).toIndexedSeq).toSeq
+  val Seq(initialDeck1, initialDeck2) = input.split(lineSeparator * 2).map(_.split(lineSeparator).tail.map(_.toInt).toIndexedSeq).toSeq
 
   def score(deck: Seq[Int]): Int = deck.reverse.zipWithIndex.map((c, i) => c * (i + 1)).sum
 

@@ -8,7 +8,7 @@ object Day12 extends Day(12):
     def +(that: Vec): Vec = Vec(x + that.x, y + that.y)
     def *(v: Int): Vec = Vec(x * v, y * v)
     def rotate(v: Int): Vec = if v > 0 then Vec(-y, x).rotate(v - 1) else this
-    def manhattan: Int = Math.abs(x) + Math.abs(y)
+    def manhattan: Int = x.abs + y.abs
 
   val Zero = Vec(0, 0)
 

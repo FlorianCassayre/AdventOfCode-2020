@@ -3,7 +3,7 @@ package adventofcode.solutions
 import adventofcode.Day
 
 object Day05 extends Day(5):
-  
+
   def parse(`0`: Char, `1`: Char)(code: String): Int =
     code.map {
       case `0` => 0
@@ -16,5 +16,5 @@ object Day05 extends Day(5):
     .sorted
 
   override def solutionA = seats.max
-  
+
   override def solutionB = seats.tail.zip(seats).find(_ - _ == 2).map(_._1 - 1).get

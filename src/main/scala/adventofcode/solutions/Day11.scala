@@ -12,7 +12,7 @@ object Day11 extends Day(11):
     case '.' => None
   })
 
-  def inBounds(p: Point): Boolean = p.x >= 0 && p.x < map.head.size && p.y >= 0 && p.y < map.size
+  def inBounds(p: Point): Boolean = map.head.indices.contains(p.x) && map.indices.contains(p.y)
 
   val range = -1 to 1
   val directions = for y <- range; x <- range; if x != 0 || y != 0; yield Point(x, y)

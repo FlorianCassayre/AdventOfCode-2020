@@ -13,7 +13,7 @@ object Day03 extends Day(3):
 
   val firstSlope = (3, 1)
 
-  override def solutionA = firstSlope.pipe(traverse(_, _))
+  override def solutionA = traverse.tupled(firstSlope)
 
   val allSlopes = Seq((1, 1), (3, 1), (5, 1), (7, 1), (1, 2))
 
