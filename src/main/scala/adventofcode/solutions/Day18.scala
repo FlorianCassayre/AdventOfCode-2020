@@ -4,50 +4,48 @@ import adventofcode.Day
 
 object Day18 extends Day(18):
 
+  enum Operation(val apply: (Long, Long) => Long):
+    case Addition extends Operation(_ + _)
+    case Multiplication extends Operation(_ * _)
+
+  import Operation._
+
   enum Token:
     case Literal(v: Int)
-    case Plus
-    case Times
+    case Operator(op: Operation)
     case OpenParenthesis
     case CloseParenthesis
 
   import Token._
 
-  val expressions = lines.map(_.toCharArray.toIndexedSeq.filter(_ != ' ').map {
+  val expressions = lines.map(_.filter(_ != ' ').map {
     case '(' => OpenParenthesis
     case ')' => CloseParenthesis
-    case '+' => Plus
-    case '*' => Times
+    case '+' => Operator(Addition)
+    case '*' => Operator(Multiplication)
     case d => Literal(d.asDigit)
   })
 
-  def evaluate(precedences: Seq[Seq[Token]]): Long =
-    def precedence(op: Token): Int = precedences.indexWhere(_.contains(op))
-    def postfix(seq: Seq[Token], output: Seq[Token], stack: Seq[Token]): Seq[Token] =
-      seq match
-        case h +: tail =>
-          h match
-            case _: Literal => postfix(tail, h +: output, stack)
-            case OpenParenthesis => postfix(tail, output, h +: stack)
-            case CloseParenthesis =>
-              val (left, right) = stack.span(_ != OpenParenthesis)
-              postfix(tail, left.reverse ++ output, if right.head == OpenParenthesis then right.tail else right)
-            case _ =>
-              val (left, right) = stack.span(c => c != OpenParenthesis && precedence(c) >= precedence(h))
-              postfix(tail, left.reverse ++ output, h +: right)
-        case _ => stack.reverse ++ output
-    def reduce(seq: Seq[Token]): (Long, Int) =
-      seq.head match
-        case Literal(v) => (v, 1)
-        case op =>
-          val (left, i) = reduce(seq.tail)
-          val (right, j) = reduce(seq.tail.drop(i))
-          val f: (Long, Long) => Long = (op: @unchecked) match
-            case Plus => _ + _
-            case Times => _ * _
-          (f(left, right), i + j + 1)
-    expressions.map(expression => reduce(postfix(expression, Seq.empty, Seq.empty))._1).sum
+  def compute(precedences: Seq[Seq[Operation]]): Long =
+    def precedence(op: Operation): Int = precedences.indexWhere(_.contains(op))
+    def reduce(values: Seq[Long], operations: Seq[Operation]): Seq[Long] =
+      operations.foldLeft(values)((acc, op) => op.apply(acc(1), acc(0)) +: acc.drop(2))
+    def evaluate(tokens: Seq[Token]): Long =
+      val (output, stack) = tokens.foldLeft((Seq.empty[Long], Seq.empty[Seq[Operation]])) { case ((output, stack), token) =>
+        token match
+          case Literal(v) => (v +: output, stack)
+          case OpenParenthesis => (output, Seq.empty +: stack)
+          case CloseParenthesis => (reduce(output, stack.head), stack.tail)
+          case Operator(op) =>
+            stack match
+              case head +: tail =>
+                val (left, right) = head.span(precedence(_) >= precedence(op))
+                (reduce(output, left), (op +: right) +: tail)
+              case _ => (output, Seq(Seq(op)))
+      }
+      reduce(output, stack.head).head
+    expressions.map(evaluate).sum
 
-  override def solutionA = evaluate(Seq(Seq(Times, Plus)))
+  override def solutionA = compute(Seq(Seq(Addition, Multiplication)))
 
-  override def solutionB = evaluate(Seq(Seq(Times), Seq(Plus)))
+  override def solutionB = compute(Seq(Seq(Multiplication), Seq(Addition)))
