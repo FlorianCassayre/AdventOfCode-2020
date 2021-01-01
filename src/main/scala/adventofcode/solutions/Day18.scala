@@ -31,17 +31,14 @@ object Day18 extends Day(18):
     def reduce(values: Seq[Long], operations: Seq[Operation]): Seq[Long] =
       operations.foldLeft(values)((acc, op) => op.apply(acc(1), acc(0)) +: acc.drop(2))
     def evaluate(tokens: Seq[Token]): Long =
-      val (output, stack) = tokens.foldLeft((Seq.empty[Long], Seq.empty[Seq[Operation]])) { case ((output, stack), token) =>
+      val (output, stack) = tokens.foldLeft((Seq.empty[Long], Seq(Seq.empty[Operation]))) { case ((output, stack), token) =>
         token match
           case Literal(v) => (v +: output, stack)
           case OpenParenthesis => (output, Seq.empty +: stack)
           case CloseParenthesis => (reduce(output, stack.head), stack.tail)
           case Operator(op) =>
-            stack match
-              case head +: tail =>
-                val (left, right) = head.span(precedence(_) >= precedence(op))
-                (reduce(output, left), (op +: right) +: tail)
-              case _ => (output, Seq(Seq(op)))
+            val (left, right) = stack.head.span(precedence(_) >= precedence(op))
+            (reduce(output, left), (op +: right) +: stack.tail)
       }
       reduce(output, stack.head).head
     expressions.map(evaluate).sum
